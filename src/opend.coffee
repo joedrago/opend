@@ -9,7 +9,7 @@ appName = 'OpenD'
 debugMode = true
 
 # -----------------------------------------------------------------------------
-# Create / attach main menu
+# Create main menu
 
 mainMenu = new gui.Menu({ 'type': 'menubar' })
 if process.platform == 'darwin'
@@ -17,10 +17,6 @@ if process.platform == 'darwin'
     hideEdit: true
     hideWindow: true
   })
-gui.Window.get().menu = mainMenu
-
-# -----------------------------------------------------------------------------
-# File menu
 
 fileMenu = new gui.Menu()
 fileMenu.append new gui.MenuItem {
@@ -29,9 +25,6 @@ fileMenu.append new gui.MenuItem {
     console.log "WAT"
 }
 mainMenu.append new gui.MenuItem { label: 'File', submenu: fileMenu }
-
-# -----------------------------------------------------------------------------
-# Debug menu
 
 if debugMode
   debugItem = new gui.MenuItem({ label: 'Debug' })
@@ -42,6 +35,8 @@ if debugMode
   debugMenu.append(menuItem)
   menuItem.click = ->
     gui.Window.get().showDevTools()
+
+gui.Window.get().menu = mainMenu
 
 # -----------------------------------------------------------------------------
 # derpy stuff
