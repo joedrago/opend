@@ -1,18 +1,52 @@
-os = require('os')
+# -----------------------------------------------------------------------------
+# Includes
+
 gui = window.require('nw.gui')
 
-menu = new gui.Menu({ 'type': 'menubar' })
-menu.append(new gui.MenuItem({ label: 'Item A' }))
-menu.append(new gui.MenuItem({ label: 'Item B' }))
-menu.append(new gui.MenuItem({ type: 'separator' }))
-menu.append(new gui.MenuItem({ label: 'Item C' }))
+# -----------------------------------------------------------------------------
+# Settings
+appName = 'OpenD'
+debugMode = true
 
-win = gui.Window.get()
-if os.platform() == 'darwin'
-  menu.createMacBuiltin("OpenD")
-win.menu = menu
+# -----------------------------------------------------------------------------
+# Create / attach main menu
+
+mainMenu = new gui.Menu({ 'type': 'menubar' })
+if process.platform == 'darwin'
+  mainMenu.createMacBuiltin(appName, {
+    hideEdit: true
+    hideWindow: true
+  })
+gui.Window.get().menu = mainMenu
+
+# -----------------------------------------------------------------------------
+# File menu
+
+fileMenu = new gui.Menu()
+fileMenu.append new gui.MenuItem {
+  label: 'Wat'
+  click: ->
+    console.log "WAT"
+}
+mainMenu.append new gui.MenuItem { label: 'File', submenu: fileMenu }
+
+# -----------------------------------------------------------------------------
+# Debug menu
+
+if debugMode
+  debugItem = new gui.MenuItem({ label: 'Debug' })
+  debugMenu = new gui.Menu()
+  debugItem.submenu = debugMenu
+  mainMenu.append(debugItem)
+  menuItem = new gui.MenuItem({ label: "Open Debugger" })
+  debugMenu.append(menuItem)
+  menuItem.click = ->
+    gui.Window.get().showDevTools()
+
+# -----------------------------------------------------------------------------
+# derpy stuff
 
 $("#search").on 'input', (ev) ->
   console.log "yep", $("#search").val()
-
 $("#search").focus()
+

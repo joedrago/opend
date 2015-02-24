@@ -6,7 +6,7 @@
   "window": {
     "title": "opend",
     "icon": "link.png",
-    "toolbar": true,
+    "toolbar": false,
     "frame": true,
     "width": 400,
     "height": 600,
