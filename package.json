@@ -1,0 +1,26 @@
+{
+  "name": "opend",
+  "description": "opend",
+  "version": "0.1.0",
+  "main": "index.html",
+  "window": {
+    "title": "opend",
+    "icon": "link.png",
+    "toolbar": true,
+    "frame": true,
+    "width": 400,
+    "height": 600,
+    "position": "mouse",
+    "min_width": 400,
+    "min_height": 200,
+    "max_width": 0,
+    "max_height": 0
+  },
+  "scripts": {
+    "start": "nw"
+  },
+  "dependencies": {
+    "coffee-script": "*",
+    "nw": "*"
+  }
+}

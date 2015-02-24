@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>OpenD</title>
+  <style>
+
+  body {
+    background-color: #222222;
+  }
+
+  #search {
+    color: #ffffff;
+    font-weight: 900;
+    font-family: monospace;
+    background-color: #333333;
+    width: 100%;
+    font-size: 1.5em;
+    border: 0px solid #ff0000;
+    outline: none;
+  }
+
+  </style>
+</head>
+
+<body>
+  <input type="text" id="search">
+  <div id="list"></div>
+  <script src="./ext/jquery-1.11.2.min.js"></script>
+  <script>
+    $(function() {
+      global.$ = window.$
+      global.jQuery = window.jQuery
+      require('coffee-script/register');
+      require('./src/opend.coffee');
+    });
+  </script>
+</body>
+
+</html>
