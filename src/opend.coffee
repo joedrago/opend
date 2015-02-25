@@ -18,13 +18,13 @@ if process.platform == 'darwin'
     hideWindow: true
   })
 
-fileMenu = new gui.Menu()
-fileMenu.append new gui.MenuItem {
+viewMenu = new gui.Menu()
+viewMenu.append new gui.MenuItem {
   label: 'Wat'
   click: ->
     console.log "WAT"
 }
-mainMenu.append new gui.MenuItem { label: 'File', submenu: fileMenu }
+mainMenu.append new gui.MenuItem { label: 'View', submenu: viewMenu }
 
 if debugMode
   debugItem = new gui.MenuItem({ label: 'Debug' })
@@ -39,9 +39,25 @@ if debugMode
 gui.Window.get().menu = mainMenu
 
 # -----------------------------------------------------------------------------
+# Keyboard shortcuts
+
+window.Mousetrap.bind 'escape', ->
+  console.log 'HIDE'
+  gui.Window.get().hide()
+
+gui.App.registerGlobalHotKey new gui.Shortcut({
+  key: "Ctrl+Shift+O"
+  active: ->
+    console.log("Global desktop keyboard shortcut: " + this.key + " active.");
+    gui.Window.get().show()
+  failed: (msg) ->
+    console.log(msg);
+})
+
+# -----------------------------------------------------------------------------
 # derpy stuff
 
 $("#search").on 'input', (ev) ->
   console.log "yep", $("#search").val()
-$("#search").focus()
 
+$("#search").focus()
